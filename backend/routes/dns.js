@@ -3,14 +3,20 @@ import dns from 'dns';
 
 const dnsRouter = Router();
 
-dnsRouter.get('/:ip', (req, res) => {
-  const { ip } = req.params;
+dnsRouter.get('/', (req, res) => {
+  const { ip } = req.query;
 
-  dns.reverse(ip, (err, hostnames) => {
+  if (!ip) {
+    return res.status(400).json({ error: 'Missing ip query parameter' });
+  }
+
+  const cleanIp = String(ip).split('/')[0];
+
+  dns.reverse(cleanIp, (err, hostnames) => {
     if (err) {
       return res.status(400).json({ error: err.message });
     }
-    res.json({ ip, hostnames });
+    res.json({ ip: String(ip), hostnames });
   });
 });
 
