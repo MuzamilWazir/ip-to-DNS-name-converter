@@ -2,7 +2,7 @@
 
 A simple full-stack web application that converts IP addresses to their DNS hostnames using reverse DNS lookup.
 
-![App Screenshot](assets/screenshot.png)
+![App Screenshot](frontend/src/assets/screenshot.png)
 
 ## Features
 
